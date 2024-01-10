@@ -163,7 +163,29 @@ class Player:
         rows = CURSOR.execute(sql).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
-            
+    
+    @classmethod
+    def find_by_name(cls, name):
+        """Return Player object corresponding to first table row matching specified name"""
+        sql = """
+            SELECT * 
+            FROM players
+            WHERE name is ?
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_position(cls, position):
+        """Return Player objects matching specified position"""
+        sql = """
+            SELECT *
+            FROM players
+            WHERE position is ?
+        """
+        rows = CURSOR.execute(sql, (position,)).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+        
 
 
 
