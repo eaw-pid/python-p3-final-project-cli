@@ -15,7 +15,7 @@ class Player:
     def __repr__(self):
         return (
             f"<Player: {self.name}, Age: {self.age}, Position: {self.position}, " +
-            f"Team ID: {self.team_id}>"
+            f"Team ID: {self.team_id}>")
 
     @property
     def name(self):
@@ -97,8 +97,8 @@ class Player:
         CURSOR.execute(sql, (self.name, self.age, self.position, self.team_id))
         CONN.commit()
 
-        self.if = CURSOR.lastrowid
-        type(self.all[self.id]) = self
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
     
     def update(self):
         """Update the table row corresponding to the current Player instance."""
@@ -133,7 +133,7 @@ class Player:
         player.save()
         return player
     
-    @class method
+    @classmethod
     def instance_from_db(cls, row):
         """Return a Player object having the attribute values from the table row."""
 

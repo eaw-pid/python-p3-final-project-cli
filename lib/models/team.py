@@ -78,11 +78,11 @@ class Team:
         CURSOR.execute(sql, (self.name, self.color, self.mascot))
         CONN.commit()
 
-        self.id - CURSOR.lastrowid
+        self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
     @classmethod
-    def create(self, name, color, mascot):
+    def create(cls, name, color, mascot):
         """Initialize a new Team instance and save the obj to database"""
         team = cls(name, color, mascot)
         team.save()
@@ -95,7 +95,7 @@ class Team:
             SET name = ?, color = ?, mascot = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.color, self.mascot))
+        CURSOR.execute(sql, (self.name, self.color, self.mascot, self.id))
         CONN.commit()
     
     def delete(self):
@@ -111,7 +111,7 @@ class Team:
         #Delete the dictionary using id as key
         del type(self).all[self.id]
 
-        #Set the id to None
+        #Assign the instance id back to None
         self.id = None
     
     @classmethod
@@ -143,6 +143,18 @@ class Team:
         return [cls.instance_from_db(row) for row in rows]
     
     @classmethod
+    def find_by_id(cls, id):
+        """Return a Team object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM teams
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
+    @classmethod
     def find_by_name(cls, name):
         """Return a Team  object corresponding to first table row matching specified name"""
         sql = """
@@ -154,17 +166,17 @@ class Team:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
-    def players(self):
-        """Return list of players associated with current department"""
-        from models.player import Player
-        sql = """
-            SELECT * FROM players
-            WHERE department_id = ?
-        """
-        CURSOR.execute(sql, (self.id,),)
+    # def players(self):
+    #     """Return list of players associated with current department"""
+    #     from models.player import Player
+    #     sql = """
+    #         SELECT * FROM players
+    #         WHERE department_id = ?
+    #     """
+    #     CURSOR.execute(sql, (self.id,),)
 
-        rows = CURSOR.fetchall()
-        return [Player.instance_from_db(row) for row in rows]
+    #     rows = CURSOR.fetchall()
+    #     return [Player.instance_from_db(row) for row in rows]
 
 
 
