@@ -90,7 +90,7 @@ def teams():
             delete_team()
         elif teams_choice == "5":
             view_roster()
-        elif team_choice == "6":
+        elif teams_choice == "6":
             main()
         else:
             print("Invalid choice")
@@ -131,6 +131,7 @@ def players():
 
 def players_menu():
     print("-----------PLAYERS----------")
+    list_players()
     print("-----------SELECT AN OPTION BELOW----------")
     print("0. Exit the program")
     print("1. View Player Details")
