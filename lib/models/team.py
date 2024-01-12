@@ -166,17 +166,17 @@ class Team:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
-    # def players(self):
-    #     """Return list of players associated with current department"""
-    #     from models.player import Player
-    #     sql = """
-    #         SELECT * FROM players
-    #         WHERE department_id = ?
-    #     """
-    #     CURSOR.execute(sql, (self.id,),)
+    def players(self):
+        """Return list of players associated with current team"""
+        from models.player import Player
+        sql = """
+            SELECT * FROM players
+            WHERE team_id = ?
+        """
+        CURSOR.execute(sql, (self.id,),)
 
-    #     rows = CURSOR.fetchall()
-    #     return [Player.instance_from_db(row) for row in rows]
+        rows = CURSOR.fetchall()
+        return [Player.instance_from_db(row) for row in rows]
 
 
 

@@ -1,8 +1,9 @@
 from models.__init__ import CURSOR, CONN
+from models.team import Team
 
 class Player:
 
-    positions = ['Goalie', 'Center', 'Winger' 'Defense']
+    positions = ['Goalie', 'Center', 'Winger', 'Defense']
     
     all = {}
 
@@ -10,6 +11,7 @@ class Player:
         self.name = name
         self.age = age
         self.position = position
+        self.team_id = team_id
         
 
     def __repr__(self):
@@ -19,7 +21,7 @@ class Player:
 
     @property
     def name(self):
-        return name._self
+        return self._name
     
     @name.setter
     def name(self, name):
@@ -30,7 +32,7 @@ class Player:
     
     @property
     def age(self):
-        return age._self
+        return self._age
     
     @age.setter
     def age(self, age):
@@ -41,7 +43,7 @@ class Player:
 
     @property
     def position(self):
-        return position._self
+        return self._position
     
     @position.setter
     def position(self, position):
@@ -80,7 +82,7 @@ class Player:
     def drop_table(cls):
         """ Drop the table that persists Player instances """
         sql = """
-            DROP TABLE IS EXISTS players;
+            DROP TABLE IF EXISTS players;
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -184,6 +186,17 @@ class Player:
             WHERE position is ?
         """
         rows = CURSOR.execute(sql, (position,)).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+    
+    @classmethod
+    def find_by_age(cls, age):
+        """Return Player objects matching specified age"""
+        sql = """
+            SELECT *
+            FROM players
+            WHERE age is ?
+        """
+        rows = CURSOR.execute(sql, (age,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
         
 
