@@ -25,7 +25,7 @@ Take a look at the directory structure:
 
 ## CLI Menu Options
 
-![(./pic1.png)]
+![CLI Menu](pic2.png)
 ## Generating Your Environment
 
 You might have noticed in the file structure- there's already a Pipfile!
