@@ -1,8 +1,7 @@
 # lib/cli.py
 
 ##HELP
-#1) Checking for string not working b/c input of 0 or '0' is the same...
-#2) Update - getting the right number - I want user to be able to enter the number then do find_by_id
+#1) If I deleted a team, it messes up any players on that team
 #3) How do I make it show lower down and in nicer format (i.e. Teams > 5)
 
 
@@ -45,7 +44,8 @@ from helpers import (
     view_player,
     add_player,
     update_player,
-    delete_player
+    delete_player,
+    find_player_by_position
     )
 
 # import click
@@ -82,6 +82,7 @@ def teams():
             break
         elif teams_choice == "1":
             view_team()
+            # team_choices()
         elif teams_choice == "2":
             add_team()
         elif teams_choice == "3":
@@ -92,6 +93,8 @@ def teams():
             view_roster()
         elif teams_choice == "6":
             main()
+        elif teams_choice == "7":
+            players()
         else:
             print("Invalid choice")
     
@@ -106,6 +109,33 @@ def teams_menu():
     print("4. Delete a Team")
     print("5: View Team Roster")
     print("6: Return to Previous Menu")
+    print("7: Go to Player Menu")
+
+# def team_choices():
+#     while True:
+#         view_team()
+#         team_choices_menu()
+#         teams_choices = input(">")
+#         if teams_choices == "0":
+#             exit_program()
+#             break
+#         if teams_choices == "1":
+#             view_team()
+#         elif teams_choices == "3":
+#             teams()
+#         elif teams_choices == "4":
+#             main()
+#         else:
+#             print('Invalid choice')
+
+
+# def team_choices_menu():
+#     print("-----------------------------")
+#     print("-----------------------------")
+#     print("0. Exit the program.")
+#     print("1. View Team Details")
+#     print("3: Return to previous menu.")
+#     print("4: Return to main menu.")
     
 
 def players():
@@ -125,7 +155,11 @@ def players():
         elif players_choice == "4":
             delete_player()
         elif players_choice == "5":
+            find_player_by_position()
+        elif players_choice == "6":
             main()
+        elif players_choice == "7":
+            teams()
         else:
             print("Invalid choice")
 
@@ -138,8 +172,10 @@ def players_menu():
     print("2. Add New Player")
     print("3. Update a Player")
     print("4. Delete a Player")
+    print("5: Search for Player by Position")
     ## Search for Players By: Option 1: Age, Option2: Position
-    print("5: Return to Previous Menu")
+    print("6: Return to Previous Menu")
+    print("7: Go the Teams Menu")
 
 if __name__ == "__main__":
     main()
