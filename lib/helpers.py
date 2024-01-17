@@ -29,15 +29,15 @@ def view_team():
     list_teams()
     num = input("Enter the number of the team: ")  
     if 0 <= int(num) <= len(Team.get_all()):
-    # name = input("Enter Team Name For Details: ")
         try:
             team = Team.get_all()[int(num) - 1]
             roster = team.players()
-            # team_to_view = Team.find_by_name(name)
+            print("-----------TEAM DETAILS-----------")
             print(f"Team Name: {team.name}, Team Color: {team.color}, Mascot: {team.mascot}")
-            print(f"Roster: {roster}")
+            print("Roster:")
+            for i, player in enumerate(roster, start = 1):
+                print(f"{i}: {player.name}, {player.age}, {player.position}")
             print("---------------------------------------------")
-            # print(f"Team Name: {team_to_view.name}, Team Color: {team_to_view.color}, Mascot: {team_to_view.mascot}")
         except Exception as exc:
             print('Team Not Found', exc)
 
