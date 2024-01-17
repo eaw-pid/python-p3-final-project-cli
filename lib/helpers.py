@@ -99,13 +99,17 @@ def list_players():
 
 def view_player():
     list_players()
-    name = input("Enter Player Name For Details: ")
-    try:
-        player_to_view = Player.find_by_name(name)
-        ##Need code to show the team Name not ID
-        print(f"Player: {player_to_view.name}, Age: {player_to_view.age}, Position: {player_to_view.position}, Team: ")
-    except Exception as exc:
-        print('Player Not Found', exc)
+    num = input("Enter the Number for the Player: ")
+    if 0 <= int(num) <= len(Player.get_all()):
+        try:
+            player = Player.get_all()[int(num) - 1]
+            player_team = Team.find_by_id(player.team_id)
+            breakpoint()
+            print('--------PLAYER DETAILS--------')
+            print(f"Player: {player.name}, Age: {player.age}, Position: {player.position}, Team: {player_team.name}")    
+        except Exception as exc:
+            print('Player Not Found', exc)
+
 
 def add_player():
     name = input("Enter Player Name: ")

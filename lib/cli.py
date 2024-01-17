@@ -66,7 +66,9 @@ def main():
 
 
 def menu():
-    print("-----------Junior Hockey Organization----------")
+    print("_______________________________________________")
+    print("_______________________________________________")
+    print("-----------Junior Hockey House League----------")
     print("Please select an option:")
     print("0. Exit the program")
     print("1. Teams")
@@ -99,6 +101,7 @@ def teams():
             print("Invalid choice")
     
 def teams_menu():
+    print("_______________________________________________")
     print("-----------TEAMS----------")
     list_teams()
     print("-----------SELECT AN OPTION BELOW----------")
@@ -164,8 +167,9 @@ def players():
             print("Invalid choice")
 
 def players_menu():
+    print("_______________________________________________")
     print("-----------PLAYERS----------")
-    list_players()
+    #list_players()
     print("-----------SELECT AN OPTION BELOW----------")
     print("0. Exit the program")
     print("1. View Player Details")

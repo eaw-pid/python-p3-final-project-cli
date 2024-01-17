@@ -1,11 +1,9 @@
-# Phase 3 CLI+ORM Project Template
+# Phase 3 CLI + ORM Project 
 
-## Learning Goals
+## Junior Hockey House League Roster
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
-
----
+## Description
+This is a command line interface (CLI) application to explore the relationship between hockey teams and their players. It represents a one-to-many relationship between the teams and their players.
 
 ## Introduction
 
