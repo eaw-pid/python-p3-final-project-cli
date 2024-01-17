@@ -23,7 +23,9 @@ Take a look at the directory structure:
     └── helpers.py
 ```
 
+## CLI Menu Options
 
+![(./pic1.png)]
 ## Generating Your Environment
 
 You might have noticed in the file structure- there's already a Pipfile!
