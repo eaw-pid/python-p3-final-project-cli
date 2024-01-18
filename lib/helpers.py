@@ -32,12 +32,15 @@ def view_team():
         try:
             team = Team.get_all()[int(num) - 1]
             roster = team.players()
+            print("\n")
+            print("\n")
             print("-----------TEAM DETAILS-----------")
             print(f"Team Name: {team.name}, Team Color: {team.color}, Mascot: {team.mascot}")
+            print("\n")
             print("Roster:")
             for i, player in enumerate(roster, start = 1):
                 print(f"{i}: {player.name}, {player.age}, {player.position}")
-            print("---------------------------------------------")
+            print("\n")
             return team
         except Exception as exc:
             print('Team Not Found', exc)
@@ -173,8 +176,8 @@ def delete_player(team):
     print("---------------------------------------------")
     for i, player in enumerate(player_list, start = 1):
         print(f"{i}: {player.name}, {player.age}, {player.position}")
+    print("\n")
     num = input("Enter the Player Number: ")
-    
     if 0 <= int(num) <= len(Player.get_all()):
         player = player_list[int(num) - 1]
         player.delete()

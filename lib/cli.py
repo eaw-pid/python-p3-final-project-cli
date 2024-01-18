@@ -43,7 +43,7 @@ def main_menu():
     print("0. Exit the program")
     print("1. Teams")
     print("2. Players")
-    
+    print("\n")
 
 def teams():
     while True:
@@ -69,16 +69,20 @@ def teams_menu():
     print("___________________________________________")
     print("-----------------TEAMS MENU----------------")
     print("-----------SELECT AN OPTION BELOW----------")
+    print("\n")
     print("0. Exit the program")
     print("1. View Team Details")
     print("2. Add a New Team")
     print("3. Delete a Team")
     print("4: Return to Previous Menu")
+    print("\n")
 
 def selected_team_menu():
     print("__________________________________________________")
-    list_teams()
+    print("\n")
     print("-----------SELECT A TEAM TO VIEW DETAILS----------")
+    list_teams()
+    print("\n")
     chosen_team = view_team()
     selected_team_options(chosen_team)
 
@@ -119,6 +123,7 @@ def team_options_menu():
     print("3: Update a Player.")
     print("4: Update the Team.")
     print("5. Return to Previous Menu.")
+    print("\n")
     
 
 def players():
@@ -142,7 +147,7 @@ def players():
 def players_menu():
     print("_______________________________________________")
     print("-----------------PLAYERS MENU------------------")
-    #list_players()
+    print("\n")
     print("-------------SELECT AN OPTION BELOW------------")
     print("0. Exit the program")
     print("1. Add New Player")
@@ -150,6 +155,7 @@ def players_menu():
     ## Search for Players By: Option 1: Age, Option2: Position
     print("3: Return to Previous Menu")
     print("4: Go the Teams Menu")
+    print("\n")
 
 if __name__ == "__main__":
     main()
