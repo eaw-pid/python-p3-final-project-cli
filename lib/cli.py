@@ -60,22 +60,23 @@ def teams():
         elif teams_choice == "3":
             delete_team()
             teams()
-        elif teams_choice == "5":
+        elif teams_choice == "4":
             main()
         else:
             print("Invalid choice")
 
 def teams_menu():
-    print("_______________________________________________")
+    print("___________________________________________")
+    print("-----------------TEAMS MENU----------------")
     print("-----------SELECT AN OPTION BELOW----------")
     print("0. Exit the program")
     print("1. View Team Details")
     print("2. Add a New Team")
-    print("4. Delete a Team")
-    print("5: Return to Previous Menu")
+    print("3. Delete a Team")
+    print("4: Return to Previous Menu")
 
 def selected_team_menu():
-    print("_______________________________________________")
+    print("__________________________________________________")
     list_teams()
     print("-----------SELECT A TEAM TO VIEW DETAILS----------")
     chosen_team = view_team()
@@ -93,16 +94,16 @@ def selected_team_options(team):
             break
         if teams_choices == "1":
             add_player(team)
-            main()
+            teams()
         elif teams_choices == "2":
             delete_player(team)
-            main()
+            teams()
         elif teams_choices == "3":
             update_player(team)
-            main()
+            teams()
         elif teams_choices == "4":
             update_team(team)
-            main()
+            teams()
         elif team_choices == "5":
             main()
         else:
@@ -131,24 +132,24 @@ def players():
             add_player_general()
         elif players_choice == "2":
             find_player_by_position()
-        elif players_choice == "6":
+        elif players_choice == "3":
             main()
-        elif players_choice == "7":
+        elif players_choice == "4":
             teams()
         else:
             print("Invalid choice")
 
 def players_menu():
     print("_______________________________________________")
-    print("-----------PLAYERS----------")
+    print("-----------------PLAYERS MENU------------------")
     #list_players()
-    print("-----------SELECT AN OPTION BELOW----------")
+    print("-------------SELECT AN OPTION BELOW------------")
     print("0. Exit the program")
     print("1. Add New Player")
     print("2: Search for Player by Position")
     ## Search for Players By: Option 1: Age, Option2: Position
-    print("6: Return to Previous Menu")
-    print("7: Go the Teams Menu")
+    print("3: Return to Previous Menu")
+    print("4: Go the Teams Menu")
 
 if __name__ == "__main__":
     main()
