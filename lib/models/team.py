@@ -105,6 +105,9 @@ class Team:
             DELETE from teams
             WHERE id = ?
         """
+        ##iterate through each player and run player.delete
+        for player in self.players():
+            player.delete()
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
