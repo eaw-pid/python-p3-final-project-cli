@@ -25,11 +25,11 @@ Take a look at the directory structure:
 
 ## CLI Menu Options
 
-Main Menu
+# Main Menu
 ![CLI Menu](cli1.png)
-Teams Menu
+# Teams Menu
 ![CLI Menu](CLI4.png)
-Players Menu
+# Players Menu
 ![CLI Menu](cli3.png)
 
 ## Generating Your Environment
