@@ -165,29 +165,6 @@ def update_player(team):
     else:
         print(f'Player {num} Not Found')
 
-    # if 0 <= int(num) <= len(Player.get_all()):
-    #     try:
-    #         player = Player.get_all()[int(num) -1]
-    #         player_team_id = player.team_id
-    #         player_team = Team.find_by_id(player_team_id)
-    #         print(f'Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {player_team.name}')            
-    #         name = input("New Player Name: ")
-    #         player.name = name
-    #         age = input("New Player Age: ")
-    #         player.age = int(age)
-    #         position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
-    #         player.position = position
-    #         team = input("Enter Player's New Team: ")
-    #         new_team = Team.find_by_name(team)
-    #         player.team = new_team.id
-    #         player.update()
-    #         print(f'Success! {player.name} has been updated!')
-    #         print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {new_team.name}')
-    #     except Exception as exc:
-    #         print(f'Error updating Player', exc)
-    # else:
-    #     print(f'Player {num} Not Found')
-
 
 def delete_player(team):
     player_list = team.players()

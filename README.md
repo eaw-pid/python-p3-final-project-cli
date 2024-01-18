@@ -3,7 +3,13 @@
 ## Junior Hockey House League Roster
 
 ## Description
-This is a command line interface (CLI) application to explore the relationship between hockey teams and their players. It represents a one-to-many relationship between the teams and their players.
+This is a command line interface (CLI) application that allows a user to manage the team and players within a junior hockey house league.
+
+You can run the file `cli.py` to start up the CLI.
+
+## Demo
+
+Link to a video demonstrating the functionality.
 
 ## File Structure and Contents
 
@@ -27,37 +33,47 @@ Take a look at the directory structure:
 
 ### Main Menu
 ![CLI Menu](cli1.png)
+
+From the Main Menu, you can choose either choose the Team or Players menu.
+
 ### Teams Menu
 ![CLI Menu](CLI4.png)
+
+From the Teams Menu, if you select 'View Team Details', you can select a Team to view the team details and roster. From there, you can add, delete or update players, or update the team. From the Teams Menu, you can also add or delete Teams, which will also delete any players on that team.
+
 ### Players Menu
 ![CLI Menu](cli3.png)
 
-## Generating Your Environment
+From the Players Menu, you can add a new player to any team and search for players by their position.
 
-You might have noticed in the file structure- there's already a Pipfile!
+## Helper Functions
 
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
+`exit_program()` exists the program from all menus when you select '0'.
 
-```console
-pipenv install
-pipenv shell
-```
+`list_teams()` shows all the players in the league
 
----
+`add_team()` lets you add a new team to the database.
+
+`view_team()` shows the details of a specific team, including the team name, color and mascot, as well as the roster.
+
+`update_team()` allows the user to update the name, color or mascot of the team.
+
+`delete_team()` deletes a team from the database.
+
+`view_roster()` shows all of the players on a specific team.
+
+`list_players()` shows all of the players in the league.
+
+`add_player()` lets the user add a new player to the selected team.
+
+`add_player_general()` lets the user add a new player to the database from the Players Menu.
+
+`update_player()` lets the user update a player from the selected team.
+
+`delete_player()` lets the user delete a player from the selected team.
+
+`find_player_by_position()` lets the user search for players by their position and returns a list of all players in that position from all teams.
 
 
 
-## Conclusion
 
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
-
-Happy coding!
-
----
-
-## Resources
-
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
