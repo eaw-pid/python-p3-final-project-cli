@@ -15,7 +15,8 @@ from helpers import (
     add_player_general,
     update_player,
     delete_player,
-    find_player_by_position
+    find_player_by_position,
+    update_player_through_player
     )
 
 
@@ -108,7 +109,7 @@ def selected_team_options(team):
         elif teams_choices == "4":
             update_team(team)
             teams()
-        elif team_choices == "5":
+        elif teams_choices == "5":
             main()
         else:
             print('Invalid choice')
@@ -134,12 +135,14 @@ def players():
             exit_program()
             break
         elif players_choice == "1":
-            add_player_general()
+            selected_players_menu()
         elif players_choice == "2":
-            find_player_by_position()
+            add_player_general()
         elif players_choice == "3":
-            main()
+            find_player_by_position()
         elif players_choice == "4":
+            main()
+        elif players_choice == "5":
             teams()
         else:
             print("Invalid choice")
@@ -150,11 +153,44 @@ def players_menu():
     print("\n")
     print("-------------SELECT AN OPTION BELOW------------")
     print("0. Exit the program")
-    print("1. Add New Player")
-    print("2: Search for Player by Position")
-    ## Search for Players By: Option 1: Age, Option2: Position
-    print("3: Return to Previous Menu")
-    print("4: Go the Teams Menu")
+    print("1. View Player Details")
+    print("2. Add New Player")
+    print("3: Search for Player by Position")
+    print("4: Return to Previous Menu")
+    print("5: Go the Teams Menu")
+    
+    print("\n")
+
+def selected_players_menu():
+    print("__________________________________________________")
+    print("\n")
+    print("-----------SELECT A PLAYER TO VIEW DETAILS----------")
+    list_players()
+    print("\n")
+    chosen_player = view_player()
+    selected_player_options(chosen_player)
+
+def selected_player_options(player):
+    player = player
+    while True:
+        player_options_menu()
+        player_choices = input(">")
+        if player_choices == "0":
+            exit_program()
+            break
+        elif player_choices == "1":
+            update_player_through_player(player)
+            teams()
+        elif player_choices == "2":
+            players()
+        
+
+def player_options_menu():
+    print("-----------------------------")
+    print("-----------------------------")
+    print("0. Exit the program.")
+    print("1: Update Player.")
+    print("2. Return to Previous Menu.")
     print("\n")
 
 if __name__ == "__main__":
