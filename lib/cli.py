@@ -12,11 +12,12 @@ from helpers import (
     view_roster,
     view_player,
     add_player,
-    add_player_general,
+    # add_player_general,
     update_player,
     delete_player,
     find_player_by_position,
-    update_player_through_player
+    select_from_roster
+    # update_player_through_player
     )
 
 
@@ -69,8 +70,8 @@ def teams():
 def teams_menu():
     print("___________________________________________")
     print("-----------------TEAMS MENU----------------")
-    print("-----------SELECT AN OPTION BELOW----------")
     print("\n")
+    print("-----------SELECT AN OPTION BELOW----------")
     print("0. Exit the program")
     print("1. View Team Details")
     print("2. Add a New Team")
@@ -104,7 +105,8 @@ def selected_team_options(team):
             delete_player(team)
             teams()
         elif teams_choices == "3":
-            update_player(team)
+            update_player_menu(team)
+            # update_player(team)
             teams()
         elif teams_choices == "4":
             update_team(team)
@@ -114,6 +116,9 @@ def selected_team_options(team):
         else:
             print('Invalid choice')
 
+def update_player_menu(team):
+    player = select_from_roster(team)
+    update_player(player, player.team_id)
 
 def team_options_menu():
     print("-----------------------------")
@@ -137,7 +142,8 @@ def players():
         elif players_choice == "1":
             selected_players_menu()
         elif players_choice == "2":
-            add_player_general()
+            # add_player_general()
+            add_player()
         elif players_choice == "3":
             find_player_by_position()
         elif players_choice == "4":
@@ -171,6 +177,7 @@ def selected_players_menu():
     selected_player_options(chosen_player)
 
 def selected_player_options(player):
+    
     player = player
     while True:
         player_options_menu()
@@ -179,8 +186,9 @@ def selected_player_options(player):
             exit_program()
             break
         elif player_choices == "1":
-            update_player_through_player(player)
-            teams()
+            update_player(player)
+            # update_player_through_player(player)
+            # players()
         elif player_choices == "2":
             players()
         

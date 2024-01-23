@@ -26,7 +26,6 @@ def add_team():
         print("Error creating team: ", exc)
 
 def view_team():
-    # list_teams()
     num = input("Enter the number of the team: ")  
     if 0 <= int(num) <= len(Team.get_all()):
         try:
@@ -46,12 +45,8 @@ def view_team():
             print('Team Not Found', exc)
 
 def update_team(team):
-    print(team)
-    # num = input("Enter the number of the team: ")  
-    # if 0 <= int(num) <= len(Team.get_all()):
+    # print(team)
     try:
-    #         team = Team.get_all()[int(num) - 1]
-    #         print(team)
         name = input("New Team Name: ")
         team.name = name
         color = input("New Team Color: ")
@@ -80,7 +75,6 @@ def delete_team():
         print(f"Team: {team.name} not found!")
 
 def view_roster(team):
-    # list_teams()
     num = input("Select Team Number to View Roster: ")
     print("\n")
     print("---------------------------------------------")
@@ -100,10 +94,8 @@ def list_players():
     players = Player.get_all()
     print('List of All Players')
     for i, player in enumerate(players, start = 1):
-        # team = Team.find_by_id(player.team_id)
-        
         print(f"{i}. {player.name}")
-        #Position: {player.position}, Age: {player.age}, Team: {team.name}")
+       
 
 def view_player():
     
@@ -111,46 +103,35 @@ def view_player():
     if 0 <= int(num) <= len(Player.get_all()):
         try:
             player = Player.get_all()[int(num) - 1]
-            
-            
-            # print('--------PLAYER DETAILS--------')
-            # team = Team.find_by_id(player.team_id)
-            # print(f"Player: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}")    
+            print('--------PLAYER DETAILS--------')
+            team = Team.find_by_id(player.team_id)
+            print(f"Player: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}")    
+            print("\n")
             return player
         except Exception as exc:
             print('Player Not Found', exc)
 
-
-def add_player(team):
-    print(team.id)
+##to make this more general, should I do a default parameter vaLue?
+def add_player(team=None):
+    # print(team.id)
     name = input("Enter Player Name: ")
     age = input("Enter Player Age: ")
     position = input("Enter Position( Must be: Goalie, Center, Winger, or Defense): ")
-    # list_teams()
-    # team = input(f"Enter Player's Team (Must be in list): ")
-    # team_ = Team.find_by_name(team)
+    if isinstance(team, Team):
+        team_id = team.id
+    else:
+        list_teams()
+        team = input(f"Enter Player's Team (Must be in list): ")
+        new_team = Team.find_by_name(team)
+        team_id = new_team.id
     try:
-        new_team = Player.create(name, int(age), position, team.id)
+        new_team = Player.create(name, int(age), position, team_id)
         print(f"Success! {new_team.name} Added!")
     except Exception as exc:
         print("Error creating player", exc)
 
-def add_player_general():
-    name = input("Enter Player Name: ")
-    age = input("Enter Player Age: ")
-    position = input("Enter Position( Must be: Goalie, Center, Winger, or Defense): ")
-    list_teams()
-    team = input(f"Enter Player's Team (Must be in list): ")
-    team_ = Team.find_by_name(team)
-    try:
-        new_team = Player.create(name, int(age), position, team_.id)
-        print(f"Success! {new_team.name} Added!")
-    except Exception as exc:
-        print("Error creating player", exc)
 
-def update_player(team):
-    print(team)
-
+def select_from_roster(team):
     player_list = team.players()
     print("---------------------------------------------")
     print(f'{team.name} Roster:')
@@ -159,48 +140,30 @@ def update_player(team):
         print(f"{i}: {player.name}, {player.age}, {player.position}")
     num = input("Enter the number of the player: ")
     if 0 <= int(num) <= len(Player.get_all()):
-        try:
-            player = player_list[int(num) - 1]
-            name = input("New Player Name: ")
-            player.name = name
-            age = input("New Player Age: ")
-            player.age = int(age)
-            position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
-            player.position = position
-            player.team = team
-            player.update()
-            print(f'Success! {player.name} has been updated!')
-            print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}')
-        except Exception as exc:
-            print(f'Error updating Player', exc)
-    else:
-        print(f'Player {num} Not Found')
+        player = player_list[int(num) - 1]
+        return player
 
-def update_player_through_player(player):
-    print(player)
-    print("---------------------------------------------")
-    print(f'{player.name} Details:')
-    print("---------------------------------------------")
-    team = Team.find_by_id(player.team_id)
-    print(f"Player: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}") 
-    try:
-        name = input("New Player Name: ")
-        player.name = name
-        age = input("New Player Age: ")
-        player.age = int(age)
-        position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
-        player.position = position
+def update_player(player, team_id=None):
+   
+    name = input("New Player Name: ")
+    player.name = name
+    age = input("New Player Age: ")
+    player.age = int(age)
+    position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
+    player.position = position
+    if team_id:
+        player.team_id = team_id
+    else:
         list_teams()
         team = input(f"Enter Player's Team (Must be in list): ")
         new_team = Team.find_by_name(team)
         player.team_id = new_team.id
+    try:
         player.update()
-        team = Team.find_by_id(player.team_id)
         print(f'Success! {player.name} has been updated!')
-        print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name} ')
+        print(player)
     except Exception as exc:
         print(f'Error updating Player', exc)
-
 
 
 def delete_player(team):
@@ -231,3 +194,138 @@ def find_player_by_position():
             print(f"Name: {i.name}, Age: {i.age}, Position: {i.position}, Team: {player_team.name}")
     # for i in players_by_position:
     #     print(f"Name: {i.name}, Age: {i.age}, Position: {i.position}")
+
+
+ # if isinstance(team, Team):
+    #     player_list = team.players()
+    #     print("---------------------------------------------")
+    #     print(f'{team.name} Roster:')
+    #     print("---------------------------------------------")
+    #     for i, player in enumerate(player_list, start = 1):
+    #         print(f"{i}: {player.name}, {player.age}, {player.position}")
+    #     num = input("Enter the number of the player: ")
+    #     if 0 <= int(num) <= len(Player.get_all()):
+    #         try:
+    #             player = player_list[int(num) - 1]
+    #             name = input("New Player Name: ")
+    #             player.name = name
+    #             age = input("New Player Age: ")
+    #             player.age = int(age)
+    #             position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
+    #             player.position = position
+    #             player.team = team
+    #             player.update()
+    #             print(f'Success! {player.name} has been updated!')
+    #             print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}')
+    #         except Exception as exc:
+    #             print(f'Error updating Player', exc)
+    #     else:
+    #         print(f'Player {num} Not Found')
+    # else:
+    #     selected_player = selected_player
+    #     breakpoint()
+        # team = Team.find_by_id(player.team_id)
+
+
+        
+        #         selected_team = Team.find_by_id(team_id)
+        #         # print(selected_team)
+        #         team = selected_team.id
+        #         player.update()
+        #         print(f'Success! {player.name} has been updated!')
+        #         print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {selected_team.name} ')
+        #     else:
+        #         list_teams()
+        #         team = input(f"Enter Player's Team (Must be in list): ")
+        #         new_team = Team.find_by_name(team)
+        #         player.team_id = new_team.id
+        #         player.update()
+        #         team = Team.find_by_id(player.team_id)
+        #     print(f'Success! {player.name} has been updated!')
+        #     print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name} ')
+        # except Exception as exc:
+        #     print(f'Error updating Player', exc)
+    
+
+
+# def update_player(team=None, player=None):
+#     if isinstance(team, Team):
+#         player_list = team.players()
+#         print("---------------------------------------------")
+#         print(f'{team.name} Roster:')
+#         print("---------------------------------------------")
+#         for i, player in enumerate(player_list, start = 1):
+#             print(f"{i}: {player.name}, {player.age}, {player.position}")
+#         num = input("Enter the number of the player: ")
+#         if 0 <= int(num) <= len(Player.get_all()):
+#             try:
+#                 player = player_list[int(num) - 1]
+#                 name = input("New Player Name: ")
+#                 player.name = name
+#                 age = input("New Player Age: ")
+#                 player.age = int(age)
+#                 position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
+#                 player.position = position
+#                 player.team = team
+#                 player.update()
+#                 print(f'Success! {player.name} has been updated!')
+#                 print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name}')
+#             except Exception as exc:
+#                 print(f'Error updating Player', exc)
+#         else:
+#             print(f'Player {num} Not Found')
+#     elif isinstance(player, Player):
+#         breakpoint()
+#         team = Team.find_by_id(player.team_id)
+#         try:
+#             name = input("New Player Name: ")
+#             player.name = name
+#             age = input("New Player Age: ")
+#             player.age = int(age)
+#             position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
+#             player.position = position
+#             list_teams()
+#             team = input(f"Enter Player's Team (Must be in list): ")
+#             new_team = Team.find_by_name(team)
+#             player.team_id = new_team.id
+#             player.update()
+#             team = Team.find_by_id(player.team_id)
+#             print(f'Success! {player.name} has been updated!')
+#             print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name} ')
+#         except Exception as exc:
+#             print(f'Error updating Player', exc)
+    
+
+# def update_player_through_player(player):
+#     team = Team.find_by_id(player.team_id)
+#     try:
+#         name = input("New Player Name: ")
+#         player.name = name
+#         age = input("New Player Age: ")
+#         player.age = int(age)
+#         position = input("New Position (Must be: Goalie, Center, Winger, or Defense): ")
+#         player.position = position
+#         list_teams()
+#         team = input(f"Enter Player's Team (Must be in list): ")
+#         new_team = Team.find_by_name(team)
+#         player.team_id = new_team.id
+#         player.update()
+#         team = Team.find_by_id(player.team_id)
+#         print(f'Success! {player.name} has been updated!')
+#         print(f'Player Name: {player.name}, Age: {player.age}, Position: {player.position}, Team: {team.name} ')
+#     except Exception as exc:
+#         print(f'Error updating Player', exc)
+
+# def add_player_general():
+#     pass
+#     name = input("Enter Player Name: ")
+#     age = input("Enter Player Age: ")
+#     position = input("Enter Position( Must be: Goalie, Center, Winger, or Defense): ")
+#     list_teams()
+#     team = input(f"Enter Player's Team (Must be in list): ")
+#     team_ = Team.find_by_name(team)
+#     try:
+#         new_team = Player.create(name, int(age), position, team_.id)
+#         print(f"Success! {new_team.name} Added!")
+#     except Exception as exc:
+#         print("Error creating player", exc)
