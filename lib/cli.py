@@ -12,12 +12,10 @@ from helpers import (
     view_roster,
     view_player,
     add_player,
-    # add_player_general,
     update_player,
     delete_player,
     find_player_by_position,
     select_from_roster
-    # update_player_through_player
     )
 
 
@@ -142,7 +140,6 @@ def players():
         elif players_choice == "1":
             selected_players_menu()
         elif players_choice == "2":
-            # add_player_general()
             add_player()
         elif players_choice == "3":
             find_player_by_position()
@@ -187,8 +184,7 @@ def selected_player_options(player):
             break
         elif player_choices == "1":
             update_player(player)
-            # update_player_through_player(player)
-            # players()
+            players()
         elif player_choices == "2":
             players()
         

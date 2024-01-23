@@ -45,7 +45,6 @@ def view_team():
             print('Team Not Found', exc)
 
 def update_team(team):
-    # print(team)
     try:
         name = input("New Team Name: ")
         team.name = name
@@ -111,7 +110,6 @@ def view_player():
         except Exception as exc:
             print('Player Not Found', exc)
 
-##to make this more general, should I do a default parameter vaLue?
 def add_player(team=None):
     # print(team.id)
     name = input("Enter Player Name: ")
