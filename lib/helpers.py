@@ -159,7 +159,7 @@ def update_player(player, team_id=None):
     try:
         player.update()
         print(f'Success! {player.name} has been updated!')
-        print(player)
+        #print(player)
     except Exception as exc:
         print(f'Error updating Player', exc)
 

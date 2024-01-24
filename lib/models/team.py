@@ -108,6 +108,7 @@ class Team:
         ##iterate through each player and run player.delete
         for player in self.players():
             player.delete()
+
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
@@ -142,6 +143,8 @@ class Team:
             SELECT *
             FROM teams
         """
+        #fetchall() returns rows sequentially in a tuple the iterate over each row and call instance_from_db()
+        #with each row to retrieve a Python object
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
@@ -153,7 +156,7 @@ class Team:
             FROM teams
             WHERE id = ?
         """
-
+    #fetchone() method returns the first element from fetchall()
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
 

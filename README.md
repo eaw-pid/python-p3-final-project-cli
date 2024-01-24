@@ -64,11 +64,9 @@ From the Players Menu, you can add a new player to any team and search for playe
 
 `list_players()` shows all of the players in the league.
 
-`add_player()` lets the user add a new player to the selected team.
+`add_player()` lets the user add a new player to the selected team. This can be accessed from the selected team menu or the players menu.
 
-`add_player_general()` lets the user add a new player to the database from the Players Menu.
-
-`update_player()` lets the user update a player from the selected team.
+`update_player()` lets the user update a player from the selected team. This can be accessed from the selected team menu or the players menu.
 
 `delete_player()` lets the user delete a player from the selected team.
 
